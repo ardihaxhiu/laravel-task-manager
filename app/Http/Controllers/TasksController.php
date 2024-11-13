@@ -21,6 +21,8 @@ class TasksController extends Controller
 
     public function edit(Task $task)
     {
+        $this->authorize('update', $task);
+
         return view('templates.tasks.create', [
             'item' => $task
         ]);
@@ -28,6 +30,8 @@ class TasksController extends Controller
 
     public function update(Task $task, StoreUpdateTaskRequest $request)
     {
+        $this->authorize('update', $task);
+
         $task->update($request->validated());
 
         return redirect()->route('home');
